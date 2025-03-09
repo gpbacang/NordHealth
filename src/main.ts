@@ -2,8 +2,8 @@ import './assets/main.css'
 import '@provetcloud/css'
 import '@provetcloud/web-components'
 
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createApp } from 'vue'
 
 import App from './App.vue'
 import router from './router'
