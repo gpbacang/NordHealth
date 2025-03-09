@@ -1,2 +1,2 @@
 @import 'tailwindcss';
-/* @import '~@provetcloud/tokens/lib/tokens.custom-properties.css'; */
+@import '@provetcloud/tokens/lib/tokens.custom-properties.css';
