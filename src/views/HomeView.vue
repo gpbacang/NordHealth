@@ -2,6 +2,10 @@
 
 <template>
   <main>
+    <div class="flex flex-col gap-y-4">
+      <provet-button variant="primary" expand>Login</provet-button>
+      <provet-button variant="primary" expand>Create Account</provet-button>
+    </div>
     <!-- <provet-card>
       <div>
         <h2>Vue App</h2>
