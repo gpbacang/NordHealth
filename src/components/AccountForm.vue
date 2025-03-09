@@ -41,7 +41,7 @@ const onLogout = () => {
 
 <template>
   <form @submit="onSubmit" class="flex flex-col gap-y-3">
-    <div class="n-grid-2">
+    <div class="flex flex-col md:flex-row gap-2">
       <provet-input
         label="First Name"
         name="firstName"
