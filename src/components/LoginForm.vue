@@ -4,30 +4,28 @@ import { useRouter } from 'vue-router'
 
 import { useLoginForm } from '@/composables/useLoginForm'
 import { useAccountStore } from '@/stores/account'
-import type { LoginData } from '@/types/Account'
+import { useNotification } from '@/stores/notification'
 
 const router = useRouter()
-const { saveAccount } = useAccountStore()
+const { account } = useAccountStore()
+const notificationStore = useNotification()
 
 const { errors, handleSubmit, email, emailAttrs, password, passwordAttrs } = useLoginForm()
 
 const showPassword = ref(false)
-const loading = ref(false)
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value
 }
 
 const onSubmit = handleSubmit((values) => {
-  loading.value = true
-
-  try {
-    saveAccount(values as LoginData)
+  if (account.email === values.email && account.password === values.password) {
     router.push({ name: 'account' })
-  } catch (error) {
-    console.error(error)
-  } finally {
-    loading.value = false
+  } else {
+    notificationStore.showNotification = true
+    notificationStore.message =
+      'Account not found. Please check your credentials or create an account to continue'
+    notificationStore.variant = 'danger'
   }
 })
 </script>

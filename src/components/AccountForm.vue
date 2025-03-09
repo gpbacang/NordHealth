@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { useAccountForm } from '@/composables/useAccountForm'
@@ -19,19 +18,8 @@ const {
   emailAttrs,
 } = useAccountForm()
 
-const loading = ref(false)
-
 const onSubmit = handleSubmit((values) => {
-  loading.value = true
-
-  try {
-    saveAccount(values as AccountUpdateData)
-    router.push({ name: 'account' })
-  } catch (error) {
-    console.error(error)
-  } finally {
-    loading.value = false
-  }
+  saveAccount(values as AccountUpdateData)
 })
 
 const onLogout = () => {
