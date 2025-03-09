@@ -2,8 +2,8 @@ import { useForm } from 'vee-validate'
 
 import { useAccountSchema } from '@/composables/useAccountSchema'
 
-export const useAccountForm = () => {
-  const { accountSchema } = useAccountSchema('update')
+export const useRegistrationForm = () => {
+  const { accountSchema } = useAccountSchema('registration')
 
   const { errors, handleSubmit, defineField } = useForm({
     validationSchema: accountSchema,
@@ -12,6 +12,9 @@ export const useAccountForm = () => {
   const [firstName, firstNameAttrs] = defineField('firstName')
   const [lastName, lastNameAttrs] = defineField('lastName')
   const [email, emailAttrs] = defineField('email')
+  const [password, passwordAttrs] = defineField('password')
+  const [confirmPassword, confirmPasswordAttrs] = defineField('confirmPassword')
+  const [receiveUpdates, receiveUpdatesAttrs] = defineField('receiveUpdates')
 
   return {
     errors,
@@ -22,5 +25,11 @@ export const useAccountForm = () => {
     lastNameAttrs,
     email,
     emailAttrs,
+    password,
+    passwordAttrs,
+    confirmPassword,
+    confirmPasswordAttrs,
+    receiveUpdates,
+    receiveUpdatesAttrs,
   }
 }

@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useAccountForm } from '@/composables/useAccountForm'
+import { useRegistrationForm } from '@/composables/useRegistrationForm'
 import { useAccountStore } from '@/stores/account'
-import type { Account } from '@/types/Account'
+import type { AccountData } from '@/types/Account'
 
 const router = useRouter()
 const { saveAccount } = useAccountStore()
@@ -23,7 +23,7 @@ const {
   confirmPasswordAttrs,
   receiveUpdates,
   receiveUpdatesAttrs,
-} = useAccountForm(true)
+} = useRegistrationForm()
 
 const showPassword = ref(false)
 const loading = ref(false)
@@ -36,7 +36,7 @@ const onSubmit = handleSubmit((values) => {
   loading.value = true
 
   try {
-    saveAccount(values as Account)
+    saveAccount(values as AccountData)
     router.push({ name: 'account' })
   } catch (error) {
     console.error(error)
@@ -111,8 +111,6 @@ const onSubmit = handleSubmit((values) => {
       v-model="receiveUpdates"
       v-bind="receiveUpdatesAttrs"
     ></provet-checkbox>
-    <provet-button variant="primary" expand style="margin-top: 1.5rem"
-      >Create account</provet-button
-    >
+    <provet-button variant="primary" expand class="mt-4">Create account</provet-button>
   </form>
 </template>
