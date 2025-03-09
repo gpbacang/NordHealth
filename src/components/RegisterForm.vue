@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useRegisterForm } from '@/composables/useRegisterForm'
+import { useAccountForm } from '@/composables/useAccountForm'
 import { useAccountStore } from '@/stores/account'
 import type { Account } from '@/types/Account'
 
@@ -23,7 +23,7 @@ const {
   confirmPasswordAttrs,
   receiveUpdates,
   receiveUpdatesAttrs,
-} = useRegisterForm()
+} = useAccountForm(true)
 
 const showPassword = ref(false)
 const loading = ref(false)
@@ -77,7 +77,7 @@ const onSubmit = handleSubmit((values) => {
       :error="errors.email"
       v-bind="emailAttrs"
     ></provet-input>
-    <div style="display: flex; align-items: end; width: 100%" class="n-gap-s">
+    <div class="flex gap-x-1" :class="errors.password ? 'items-center' : 'items-end'">
       <provet-input
         label="Password"
         expand
@@ -88,7 +88,7 @@ const onSubmit = handleSubmit((values) => {
         :error="errors.password"
         v-bind="passwordAttrs"
       ></provet-input>
-      <provet-button square @click="toggleShowPassword">
+      <provet-button square @click="toggleShowPassword" :class="errors.password ? 'mt-1' : ''">
         <provet-icon
           :name="showPassword ? 'interface-edit-off' : 'interface-edit-on'"
         ></provet-icon>
@@ -107,8 +107,8 @@ const onSubmit = handleSubmit((values) => {
     <provet-checkbox
       label="Keep me updated with product news and announcements"
       name="receiveUpdates"
+      type="checkbox"
       v-model="receiveUpdates"
-      :value="receiveUpdates"
       v-bind="receiveUpdatesAttrs"
     ></provet-checkbox>
     <provet-button variant="primary" expand style="margin-top: 1.5rem"
