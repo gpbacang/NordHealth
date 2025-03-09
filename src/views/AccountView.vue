@@ -4,10 +4,12 @@ import { computed } from 'vue'
 import AccountForm from '@/components/AccountForm.vue'
 import { useAccountStore } from '@/stores/account'
 
-const { account } = useAccountStore()
+const accountStore = useAccountStore()
 
-const userName = computed(() => `${account.firstName} ${account.lastName}`)
-const email = computed(() => account.email)
+const userName = computed(
+  () => `${accountStore.account.firstName} ${accountStore.account.lastName}`,
+)
+const email = computed(() => accountStore.account.email)
 </script>
 <template>
   <div class="n-padding-xxl">
