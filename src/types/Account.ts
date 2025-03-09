@@ -1,5 +1,7 @@
 export type Account = {
-  email: string;
-  password: string;
-  receiveUpdates: boolean;
-};
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  receiveUpdates?: boolean
+}
