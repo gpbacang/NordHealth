@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import { useAccountStore } from '@/stores/account'
 import AccountView from '@/views/AccountView.vue'
-import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 
@@ -11,8 +10,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      name: 'account',
+      component: AccountView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -24,19 +24,14 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
     },
-    {
-      path: '/account',
-      name: 'account',
-      component: AccountView,
-      meta: { requiresAuth: true },
-    },
   ],
 })
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const { account } = useAccountStore()
-    const isAuthenticated = !!account
+    const isAuthenticated = !!account.email
+
     if (isAuthenticated) {
       next()
     } else {
